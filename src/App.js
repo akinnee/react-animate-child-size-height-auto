@@ -28,33 +28,10 @@ const containerStyle = {
   padding: 15,
 };
 
-const viewStyle = {
-  padding: 15,
-  backgroundColor: 'white',
-};
-
-class App extends Component {
+export default class App extends Component {
   state = {
     viewKey: 'a',
     poseProps: {},
-  };
-
-  views = {
-    a({ innerRef }) {
-      return h('div', { ref: innerRef, style: viewStyle }, [
-        h('div', 'Qui delectus natus dignissimos nemo quod soluta. Nam nostrum voluptatem officiis minima nihil. Quia at voluptatem optio iure et atque rerum fugiat. Eius ab non in veritatis. Molestiae et non odit totam. Natus occaecati recusandae doloribus veritatis voluptatem.'),
-      ]);
-    },
-    b({ innerRef }) {
-      return h('div', { ref: innerRef, style: viewStyle }, [
-        h('div', 'Qui delectus natus dignissimos nemo quod soluta.'),
-        h('div', 'Nam nostrum voluptatem officiis minima nihil.'),
-        h('div', 'Quia at voluptatem optio iure et atque rerum fugiat.'),
-        h('div', 'Eius ab non in veritatis.'),
-        h('div', 'Molestiae et non odit totam.'),
-        h('div', 'Natus occaecati recusandae doloribus veritatis voluptatem.'),
-      ]);
-    }
   };
 
   onClick() {
@@ -73,11 +50,32 @@ class App extends Component {
     return h('div', { onClick: () => this.onClick(), style: containerStyle }, [
       h(PoseGroup, { preEnterPose: 'preEnter', poseProps }, [
         h(TransitionPose, { key: viewKey }, [
-          h(this.views[viewKey], { innerRef: (c) => { if (c) this.viewRef = c; } }),
+          h(views[viewKey], { innerRef: (c) => { if (c) this.viewRef = c; } }),
         ]),
       ]),
     ]);
   }
 }
 
-export default App;
+const viewStyle = {
+  padding: 15,
+  backgroundColor: 'white',
+};
+
+const views = {
+  a({ innerRef }) {
+    return h('div', { ref: innerRef, style: viewStyle }, [
+      h('div', 'Qui delectus natus dignissimos nemo quod soluta. Nam nostrum voluptatem officiis minima nihil. Quia at voluptatem optio iure et atque rerum fugiat. Eius ab non in veritatis. Molestiae et non odit totam. Natus occaecati recusandae doloribus veritatis voluptatem.'),
+    ]);
+  },
+  b({ innerRef }) {
+    return h('div', { ref: innerRef, style: viewStyle }, [
+      h('div', 'Qui delectus natus dignissimos nemo quod soluta.'),
+      h('div', 'Nam nostrum voluptatem officiis minima nihil.'),
+      h('div', 'Quia at voluptatem optio iure et atque rerum fugiat.'),
+      h('div', 'Eius ab non in veritatis.'),
+      h('div', 'Molestiae et non odit totam.'),
+      h('div', 'Natus occaecati recusandae doloribus veritatis voluptatem.'),
+    ]);
+  }
+};
